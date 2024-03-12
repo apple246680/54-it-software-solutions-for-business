@@ -1,0 +1,1176 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Competition.Program</name>
+    </assembly>
+    <members>
+        <member name="T:Competition.Program.Api.ApiBootstraper">
+            <summary>
+            API 站台啟動器
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Api.ApiBootstraper.#ctor(Microsoft.Extensions.Caching.Memory.MemoryCache,System.String)">
+            <summary>
+            初始化 API 站台啟動器
+            </summary>
+            <param name="memoryCache">用於暫存資料的記憶體快取</param>
+            <param name="defaultUrl">預設連接位置</param>
+        </member>
+        <member name="M:Competition.Program.Api.ApiBootstraper.StartWebApplicationAsync">
+            <summary>
+            啟用 Web 應用程式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Competition.Program.Api.ApiBootstraper.StopWebApplicationAsync">
+            <summary>
+            停止 Web 應用程式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Competition.Program.Api.ApiBootstraper.MemoryCache">
+            <summary>
+            取得記憶體快取
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.ApiBootstraper.WebApplication">
+            <summary>
+            設定或取得 Web 應用程式
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.ApiBootstraper.Url">
+            <summary>
+            取得或設定應用程式 Url
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.ApiBootstraper.LogStateThreadSafeObservableCollection">
+            <summary>
+            取得呼叫歷程記錄[元素變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.ApiBootstraper.MaxLogStateCount">
+            <summary>
+            取得最大紀錄數
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.ApiBootstraper.IsApplicationStarted">
+            <summary>
+            取得應用程式是否已經啟動[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Api.Controllers.ApiControllerBase">
+            <summary>
+            API 控制器基底型別
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Controllers.ApiControllerBase.ApiBootstraper">
+            <summary>
+            取得 API 專用啟動器
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Api.Controllers.ConnectionMonitorController">
+            <summary>
+            Connection Monitor
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Api.Controllers.ConnectionMonitorController.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Initialize a connection monitor instance
+            </summary>
+            <param name="loggerFactory"></param>
+        </member>
+        <member name="M:Competition.Program.Api.Controllers.ConnectionMonitorController.RetrieveSiteStatus(Competition.Program.Api.Models.Request.ConnectionMonitor.RetrieveSiteStatusRequest)">
+            <summary>
+            Get current site status.
+            </summary>
+            <param name="retrieveSiteStatusRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Competition.Program.Api.Controllers.ConnectionMonitorController.LoggerFactory">
+            <summary>
+            取得記錄檔工廠
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Api.Controllers.ImageController">
+            <summary>
+            Retrieve images
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Api.Controllers.ImageController.GenerateQRCode(Competition.Program.Api.Models.Request.Image.GenerateQRCodeRequest)">
+            <summary>
+            Generate QRCode for specific text with customized options. File format: png, 96dpi.
+            </summary>
+            <param name="generateQRCodeRequest">The parameters for generating QRCode</param>
+            <returns></returns>
+        </member>
+        <member name="P:Competition.Program.Api.Controllers.ImageController.LoggerFactory">
+            <summary>
+            取得記錄檔工廠
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Hosting.StartupHostedService.IsStarted">
+            <summary>
+            取得是否已經啟動
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Api.Models.Request.ConnectionMonitor.RetrieveSiteStatusRequest">
+            <summary>
+            The parameters for retrieving site status
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Models.Request.ConnectionMonitor.RetrieveSiteStatusRequest.StationNumber">
+            <summary>
+            Your Station Number, valid number from 1 to 20.
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Api.Models.Request.Image.GenerateQRCodeRequest">
+            <summary>
+            The parameters for generating QRCode.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Models.Request.Image.GenerateQRCodeRequest.Text">
+            <summary>
+            Get or set the text content.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Models.Request.Image.GenerateQRCodeRequest.SizePixels">
+            <summary>
+            Get or set the image size in pixels. Valid value is from 32 to 512.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Models.Request.Image.GenerateQRCodeRequest.CorrectionLevel">
+            <summary>
+            Get or set the Level of Reed-Solomon error correction. Valid value is from 0 to 3.
+            <list type="bullet">
+            <item>&lt;br/&gt;0: Allows recovery of 7% of the code text</item>
+            <item>&lt;br/&gt;1: Allows recovery of 15% of the code text</item>
+            <item>&lt;br/&gt;2: Allows recovery of 25% of the code text</item>
+            <item>&lt;br/&gt;3: Allows recovery of 30% of the code text</item>
+            </list>
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Api.Models.Response.ConnectionMonitor.RetrieveSiteStatusResponse">
+            <summary>
+            Site status response
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Models.Response.ConnectionMonitor.RetrieveSiteStatusResponse.Status">
+            <summary>
+            Get ot set the site status
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Api.Models.Response.ConnectionMonitor.RetrieveSiteStatusResponse.Data">
+            <summary>
+            Get ot set the data
+            </summary>
+        </member>
+        <member name="T:Competition.Program.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:Competition.Program.App.OnExit(System.Windows.ExitEventArgs)">
+            <summary>
+            Occurs when the application exits.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.ExitEventArgs"/> that contains data related to this event.</param>
+        </member>
+        <member name="P:Competition.Program.App.SettintCollectionFactoryInternal">
+            <summary>
+            取得應用程式唯一的設定檔集合工廠
+            </summary>
+        </member>
+        <member name="P:Competition.Program.App.TimerManagerInetrnal">
+            <summary>
+            取得全域使用的排程器管理物件
+            </summary>
+        </member>
+        <member name="M:Competition.Program.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:Competition.Program.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Converters.BoolToVisibilityConverter">
+            <summary>
+            將<see cref="T:System.Boolean"/>轉換為[<see cref="F:System.Windows.Visibility.Collapsed"/>]之<see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Converters.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter">若 true 為 Visible，則輸入 true；若 true 為 Collapsed，則輸入 false</param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Competition.Program.Converters.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter">若 Visible 為 true，則輸入 true；若 Collapsed 為 true，則輸入 false</param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Competition.Program.Enums.ApplicationSettingEnum">
+            <summary>
+            應用程式設定檔列舉
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ApplicationSettingEnum.ApiBootstraper">
+            <summary>
+            API 站台啟動器，屬於<see cref="T:Competition.Program.Api.ApiBootstraper"/>
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ApplicationSettingEnum.SmtpBootstraper">
+            <summary>
+            SMTP 伺服器啟動器，屬於<see cref="T:Competition.Program.MailServer.SmtpBootstraper"/>
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Enums.LoggingMessageType">
+            <summary>
+            紀錄的訊息類型
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.General">
+            <summary>
+            一般訊息
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.ThirdPartyHttpRequest">
+            <summary>
+            第三方HTTP請求
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.ThirdPartyHttpResponse">
+            <summary>
+            第三方HTTP回應
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.ThirdPartyHttpError">
+            <summary>
+            第三方HTTP錯誤
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.ThirdPartySoapRequest">
+            <summary>
+            第三方SOAP請求
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.ThirdPartySoapResponse">
+            <summary>
+            第三方SOAP回應
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.ThirdPartySoapError">
+            <summary>
+            第三方SOAP錯誤
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.WebApiRequest">
+            <summary>
+            Web API 請求
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.WebApiResponse">
+            <summary>
+            Web API 回應
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingMessageType.WebApiError">
+            <summary>
+            Web API 錯誤
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Enums.LoggingScope">
+            <summary>
+            紀錄所發生的位置
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingScope.API">
+            <summary>
+            API
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingScope.SMTP">
+            <summary>
+            SMTP
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingScope.Louvre">
+            <summary>
+            Louvre
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingScope.Image">
+            <summary>
+            Image
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Enums.LoggingSystemScope">
+            <summary>
+            記錄檔所發生的系統
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.LoggingSystemScope.Local">
+            <summary>
+            本地系統，非第三方系統都屬於此種系統
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Enums.ResultCodeSettingEnum">
+            <summary>
+            回傳訊息列舉
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.Success">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.InvalidArgument">
+            <summary>
+            參數驗證錯誤
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.UnrecognizedLanguage">
+            <summary>
+            無法辨識的語系
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.FieldRequired">
+            <summary>
+            欄位為必填
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.InvalidRange">
+            <summary>
+            值區間不符規定
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.ItemRequired">
+            <summary>
+            至少需要包含一個元素
+            </summary>
+        </member>
+        <member name="F:Competition.Program.Enums.ResultCodeSettingEnum.SystemError">
+            <summary>
+            系統錯誤
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Extensions.LoggingExtensions">
+            <summary>
+            處理紀錄檔的靜態擴充類別
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Extensions.LoggingExtensions.Log(Microsoft.Extensions.Logging.ILoggerFactory,Competition.Program.Logging.LogState)">
+            <summary>
+            紀錄偵錯資料
+            </summary>
+            <param name="loggerFactory"></param>
+            <param name="logState"></param>
+        </member>
+        <member name="P:Competition.Program.Logging.ConsoleLoggerProvider.DefaultLogger">
+            <summary>
+            設定或取得當無法將 category name 對應到 TScope 時，預設使用的 Logger
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Logging.LogState.CreatedDateTime">
+            <summary>
+            設定或取得資料建立時間
+            </summary>
+        </member>
+        <member name="T:Competition.Program.LouvreOfficial.Handlers.LouvreOfficialHttpClientHandler">
+            <summary>
+            處理具有紀錄功能的羅浮宮官網資料請求處理類別
+            </summary>
+        </member>
+        <member name="M:Competition.Program.LouvreOfficial.Handlers.LouvreOfficialHttpClientHandler.#ctor">
+            <summary>
+            初始化處理具有紀錄功能的羅浮宮官網資料請求處理物件
+            </summary>
+        </member>
+        <member name="M:Competition.Program.LouvreOfficial.Handlers.LouvreOfficialHttpClientHandler.#ctor(System.String)">
+            <summary>
+            初始化處理具有紀錄功能的羅浮宮官網資料請求處理物件
+            </summary>
+            <param name="webProxyAddress">Proxy 位址</param>
+        </member>
+        <member name="T:Competition.Program.LouvreOfficial.Infos.ImageInfo">
+            <summary>
+            代表 ARK JSON 檔案內的一筆圖片資料
+            </summary>
+        </member>
+        <member name="P:Competition.Program.LouvreOfficial.Infos.ImageInfo.OriginalImagePath">
+            <summary>
+            設定或取得原始圖片路徑
+            </summary>
+        </member>
+        <member name="P:Competition.Program.LouvreOfficial.Infos.ImageInfo.ThumbnailImagePath">
+            <summary>
+            設定或取得縮圖路徑
+            </summary>
+        </member>
+        <member name="P:Competition.Program.LouvreOfficial.Infos.ImageInfo.Copyright">
+            <summary>
+            設定或取得授權
+            </summary>
+        </member>
+        <member name="P:Competition.Program.LouvreOfficial.Infos.ImageInfo.Type">
+            <summary>
+            設定或取得類型
+            </summary>
+        </member>
+        <member name="P:Competition.Program.LouvreOfficial.Infos.ImageInfo.Position">
+            <summary>
+            設定或取得顯示順序
+            </summary>
+        </member>
+        <member name="T:Competition.Program.MailServer.Adapters.MailTreeNodeModel">
+            <summary>
+            Provides a tree node model implementation for a mail.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.Author">
+            <summary>
+            Gets or sets the author.
+            </summary>
+            <value>
+            The author.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.DateTime">
+            <summary>
+            Gets or sets the date/time.
+            </summary>
+            <value>
+            The date/time.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.DateTimeText">
+            <summary>
+            Gets the date/time text.
+            </summary>
+            <value>The date/time text.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.IsFlagged">
+            <summary>
+            Gets or sets whether the mail is flagged.
+            </summary>
+            <value>
+            <c>true</c> if the mail is flagged; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+            <value>
+            The text.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.CleanText">
+            <summary>
+            Gets or sets the text.(without html tags)
+            </summary>
+            <value>
+            The text.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.To">
+            <summary>
+            Gets or sets the to property.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.HasAtachments">
+            <summary>
+            Gets whether the mail has attachment(s).
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.MailTreeNodeModel.Attachments">
+            <summary>
+            Gets or sets the attachment(s).
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter"/> class.
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetChildren(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns an <see cref="T:System.Collections.IEnumerable"/> that will be used to provide child items for the specified parent item.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>An <see cref="T:System.Collections.IEnumerable"/> that will be used to provide child items for the specified parent item.</returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetDefaultActionCommand(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns the default action command.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            The <see cref="T:System.Windows.Input.ICommand"/> to execute as a default action.
+            </returns>
+            <remarks>
+            The <see cref="!:DefaultActionCommandBinding"/> property can be set for a pure XAML-based implementation of this method.
+            Please note that bindings aren't as performant as code, so for large trees or if you see performance issues,
+            it is recommended to override this method instead with custom logic to retrieve the appropriate value.
+            </remarks>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsDraggable(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is draggable.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is draggable; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsEditable(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is editable.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is editable; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsEditing(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is currently being edited.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is currently being edited; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsExpanded(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is expanded.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is expanded; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsLoading(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is currently loading children asynchronously.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is currently loading children asynchronously; otherwise, <c>false</c>.
+            </returns>
+            <remarks>
+            The <see cref="!:IsLoadingBinding"/> binding property can be set for a pure XAML-based implementation of this method.
+            Please note that bindings aren't as performant as code, so for large trees or if you see performance issues,
+            it is recommended to override this method instead with custom logic to retrieve the appropriate value.
+            </remarks>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsSelectable(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is capable of being selected.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is capable of being selected; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetIsSelected(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns whether the specified item is selected.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>
+            <c>true</c> if the specified item is selected; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetPath(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns the item's string path.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>The item's string path.</returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.GetSearchText(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)">
+            <summary>
+            Returns the item's text by which to match when searching.
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to examine.</param>
+            <returns>The item's string search text.</returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.SetIsEditing(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object,System.Boolean)">
+            <summary>
+            Sets whether the specified item is currently being edited. 
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to update.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.SetIsExpanded(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object,System.Boolean)">
+            <summary>
+            Sets whether the specified item is expanded. 
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to update.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeListBoxItemAdapter.SetIsSelected(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object,System.Boolean)">
+            <summary>
+            Sets whether the specified item is selected. 
+            </summary>
+            <param name="ownerControl">The owner control.</param>
+            <param name="item">The item to update.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.Children">
+            <summary>
+            Gets the collection of child nodes.
+            </summary>
+            <value>The collection of child nodes.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.DefaultActionCommand">
+            <summary>
+            Gets or sets the default action command.
+            </summary>
+            <value>The default action command.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.ImageSource">
+            <summary>
+            Gets or sets the <see cref="P:Competition.Program.MailServer.Adapters.TreeNodeModel.ImageSource"/> for an image to display on the node.
+            </summary>
+            <value>The <see cref="P:Competition.Program.MailServer.Adapters.TreeNodeModel.ImageSource"/> for an image to display on the node.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsDraggable">
+            <summary>
+            Gets or sets whether the node is draggable.
+            </summary>
+            <value>
+            <c>true</c> if the node is draggable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsEditable">
+            <summary>
+            Gets or sets whether the node is editable.
+            </summary>
+            <value>
+            <c>true</c> if the node is editable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsEditing">
+            <summary>
+            Gets or sets whether the node is currently being edited.
+            </summary>
+            <value>
+            <c>true</c> if the node is currently being edited; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsExpanded">
+            <summary>
+            Gets or sets whether the node is expanded.
+            </summary>
+            <value>
+            <c>true</c> if the node is expanded; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsLoading">
+            <summary>
+            Gets or sets whether the node is currently loading children asynchronously.
+            </summary>
+            <value>
+            <c>true</c> if the node is currently loading children asynchronously; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsSelectable">
+            <summary>
+            Gets or sets whether the node is capable of being selected.
+            </summary>
+            <value>
+            <c>true</c> if the node is capable of being selected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.IsSelected">
+            <summary>
+            Gets or sets whether the node is selected.
+            </summary>
+            <value>
+            <c>true</c> if the node is selected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.Name">
+            <summary>
+            Gets or sets the name of the node.
+            </summary>
+            <value>The name of the node.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Adapters.TreeNodeModel.Tag">
+            <summary>
+            Gets or sets custom data for the node.
+            </summary>
+            <value>The custom data for the node.</value>
+        </member>
+        <member name="M:Competition.Program.MailServer.Adapters.TreeNodeModel.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representation of this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> representation of this instance.
+            </returns>
+        </member>
+        <member name="T:Competition.Program.MailServer.Infos.MailAuthorizedSenderInfo">
+            <summary>
+            授權的寄件者
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Infos.MailAuthorizedSenderInfo.MailAddress">
+            <summary>
+            取得或設定信箱位址
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Infos.MailAuthorizedSenderInfo.UserName">
+            <summary>
+            取得或設定帳號
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Infos.MailAuthorizedSenderInfo.Password">
+            <summary>
+            取得或設定密碼
+            </summary>
+        </member>
+        <member name="T:Competition.Program.MailServer.Infos.ReceipentInfo">
+            <summary>
+            代表一位收件者的資訊
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.Infos.ReceipentInfo.#ctor(SmtpServer.Mail.IMailbox)">
+            <summary>
+            初始化代表一位收件者的資訊
+            </summary>
+            <param name="mailbox"></param>
+        </member>
+        <member name="P:Competition.Program.MailServer.Infos.ReceipentInfo.Messages">
+            <summary>
+            取得收件者的已收到的訊息
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Infos.ReceipentInfo.Mailbox">
+            <summary>
+            取得收件者的信箱
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Infos.ReceipentInfo.MailAddress">
+            <summary>
+            取得收件者的地址
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.MailboxFilter.LogStateThreadSafeObservableCollection">
+            <summary>
+            取得記錄檔集合[元素變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.MailboxFilter.MailAuthorizedSenderInfo">
+            <summary>
+            取得授權的寄件者
+            </summary>
+        </member>
+        <member name="T:Competition.Program.MailServer.MemoryMessageStore">
+            <summary>
+            儲存訊息資料的空間
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.MemoryMessageStore.#ctor(TEC.Core.Collections.ThreadSafeObservableCollection{Competition.Program.MailServer.Infos.ReceipentInfo},TEC.Core.Collections.ThreadSafeObservableCollection{Competition.Program.Logging.LogState})">
+            <summary>
+            初始化儲存訊息資料的空間
+            </summary>
+            <param name="receipents">用於儲存收件者資訊的集合</param>
+            <param name="logStateThreadSafeObservableCollection">記錄檔集合</param>
+        </member>
+        <member name="P:Competition.Program.MailServer.MemoryMessageStore.Receipents">
+            <summary>
+            取得儲存收件者資訊的集合
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.MemoryMessageStore.LogStateThreadSafeObservableCollection">
+            <summary>
+            取得記錄檔集合[元素變更時引發通知]
+            </summary>
+        </member>
+        <member name="T:Competition.Program.MailServer.Selectors.CustomStyleSelector">
+            <summary>
+            Chooses a <see cref="T:System.Windows.Style"/> based on the data object and the data-bound element.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Selectors.CustomStyleSelector.GroupStyle">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Style"/> to use for groups.
+            </summary>
+            <value>The <see cref="T:System.Windows.Style"/> to use for groups.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Selectors.CustomStyleSelector.MailStyle">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Style"/> to use for mail.
+            </summary>
+            <value>The <see cref="T:System.Windows.Style"/> to use for mail.</value>
+        </member>
+        <member name="M:Competition.Program.MailServer.Selectors.CustomStyleSelector.SelectStyle(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Returns a <see cref="T:System.Windows.Style"/> based on custom logic.
+            </summary>
+            <param name="item">The data object.</param>
+            <param name="container">The data-bound element.</param>
+            <returns>The <see cref="T:System.Windows.Style"/> to use.</returns>
+        </member>
+        <member name="T:Competition.Program.MailServer.Selectors.CustomTemplateSelector">
+            <summary>
+            Chooses a <see cref="T:System.Windows.DataTemplate"/> based on the data object and the data-bound element.
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.Selectors.CustomTemplateSelector.GroupTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> to use for groups.
+            </summary>
+            <value>The <see cref="T:System.Windows.DataTemplate"/> to use for groups.</value>
+        </member>
+        <member name="P:Competition.Program.MailServer.Selectors.CustomTemplateSelector.MailTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> to use for mail.
+            </summary>
+            <value>The <see cref="T:System.Windows.DataTemplate"/> to use for mail.</value>
+        </member>
+        <member name="M:Competition.Program.MailServer.Selectors.CustomTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)">
+            <summary>
+            Returns a <see cref="T:System.Windows.DataTemplate"/> based on custom logic.
+            </summary>
+            <param name="item">The data object.</param>
+            <param name="container">The data-bound element.</param>
+            <returns>The <see cref="T:System.Windows.DataTemplate"/> to use.</returns>
+        </member>
+        <member name="T:Competition.Program.MailServer.SmtpBootstraper">
+            <summary>
+            處理 SMTP 的啟動器
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.SmtpBootstraper.#ctor(Microsoft.Extensions.Caching.Memory.MemoryCache,System.String,System.String,Competition.Program.MailServer.Infos.MailAuthorizedSenderInfo)">
+            <summary>
+            初始化處理 SMTP 的啟動器
+            </summary>
+            <param name="memoryCache">用於暫存資料的記憶體快取</param>
+            <param name="defaultServerName">預設的伺服器名稱</param>
+            <param name="defaultSenderDomainName">預設的寄件者網域</param>
+            <param name="mailAuthorizedSenderInfo">授權的寄件者資訊</param>
+        </member>
+        <member name="M:Competition.Program.MailServer.SmtpBootstraper.StartSmtpServerAsync(System.Guid,SmtpServer.ISmtpServerOptions,System.Nullable{System.Threading.CancellationToken})">
+            <summary>
+            啟用 SMTP Server
+            </summary>
+            <param name="activityId">代表本次作業的 ID</param>
+            <param name="smtpServerOptions">用於啟用 Smtp Server 的參數</param>
+            <param name="cancellationToken">指出作業是否應被取消</param>
+            <returns></returns>
+        </member>
+        <member name="M:Competition.Program.MailServer.SmtpBootstraper.ShutdownSmtpServerAsync">
+            <summary>
+            關閉 SMTP Sserver
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.MailAuthorizedSender">
+            <summary>
+            取得授權發送信件的寄件者資訊
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.MemoryMessageStore">
+            <summary>
+            取得儲存訊息的區域
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.MailboxFilter">
+            <summary>
+            取得信箱過濾器
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.UserAuthenticator">
+            <summary>
+            取得用於認證使用者的物件
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.MemoryCache">
+            <summary>
+            取得記憶體快取
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.SmtpServer">
+            <summary>
+            設定或取得 Smtp Server
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.SmtpServerOptions">
+            <summary>
+            取得相關參數
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.LogStateThreadSafeObservableCollection">
+            <summary>
+            取得記錄檔集合[元素變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.MaxLogStateCount">
+            <summary>
+            取得最大紀錄數
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.IsSmtpServerStarted">
+            <summary>
+            取得信件伺服器是否已經啟動[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpBootstraper.ReceipentThreadSafeObservableCollection">
+            <summary>
+            取得收件者資訊
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.SmtpServerOptions.#ctor(System.String,System.String)">
+            <summary>
+            初始化 <see cref="T:Competition.Program.MailServer.SmtpServerOptions"/> 的執行個體
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MailServer.SmtpServerOptions.Update(SmtpServer.ISmtpServerOptions)">
+            <summary>
+            更新 <see cref="T:Competition.Program.MailServer.SmtpServerOptions"/> 內的參數
+            </summary>
+            <param name="smtpServerOptions"></param>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.MaxMessageSize">
+            <summary>
+            Gets the maximum size of a message. [值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.MaxRetryCount">
+            <summary>
+            Gets the maximum number of retries before quitting the session.[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.MaxAuthenticationAttempts">
+            <summary>
+            Gets the maximum number of authentication attempts.[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.ServerName">
+            <summary>
+            Gets the SMTP server name.[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.Endpoints">
+            <summary>
+            Gets the endpoint to listen on. [元素變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.CommandWaitTimeout">
+            <summary>
+            Gets the timeout to use when waiting for a command from the client.[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.NetworkBufferSize">
+            <summary>
+            Gets the size of the buffer that is read from each call to the underlying network client.[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.SmtpServerOptions.DefaultSenderDomainName">
+            <summary>
+            Gets the default sender's domain name.[值變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.UserAuthenticator.LogStateThreadSafeObservableCollection">
+            <summary>
+            取得記錄檔集合[元素變更時引發通知]
+            </summary>
+        </member>
+        <member name="P:Competition.Program.MailServer.UserAuthenticator.MailAuthorizedSenderInfo">
+            <summary>
+            取得授權的寄件者
+            </summary>
+        </member>
+        <member name="T:Competition.Program.MainWindow">
+            <summary>
+            MainWindow.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MainWindow.ShowPrompt(ActiproSoftware.Windows.Controls.UserPromptControl)">
+            <summary>
+            Show the prompt as an overlay.
+            </summary>
+            <param name="userPromptControl">The user prompt control to display.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> of type <see cref="T:ActiproSoftware.Windows.Controls.UserPromptStandardResult"/> which, when completed, will define the result of interacting with the user prompt.</returns>
+        </member>
+        <member name="P:Competition.Program.MainWindow.ConnectionString">
+            <summary>
+            取得連線字串
+            </summary>
+        </member>
+        <member name="M:Competition.Program.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="P:Competition.Program.PageModels.ApiSite.SiteConfigurationPageModel.ApiBootstraper">
+            <summary>
+            設定或取得 API 啟動器
+            </summary>
+        </member>
+        <member name="T:Competition.Program.PageModels.MailServer.InboxPageModel">
+            <summary>
+            SMTP 伺服器設定的頁面模型
+            </summary>
+        </member>
+        <member name="P:Competition.Program.PageModels.MailServer.InboxPageModel.SmtpBootstraper">
+            <summary>
+            設定或取得 SMTP 伺服器啟動器
+            </summary>
+        </member>
+        <member name="T:Competition.Program.PageModels.MailServer.InboxUserControlModel">
+            <summary>
+            用於 UC_Inbox 的 User Control Model
+            </summary>
+        </member>
+        <member name="P:Competition.Program.PageModels.MailServer.InboxUserControlModel.ReceipentInfo">
+            <summary>
+            取得收檢者資訊
+            </summary>
+        </member>
+        <member name="P:Competition.Program.PageModels.MailServer.InboxUserControlModel.RootTreeNodeModel">
+            <summary>
+            取得信件資料根結點
+            </summary>
+        </member>
+        <member name="T:Competition.Program.PageModels.MailServer.ServerConfigurationPageModel">
+            <summary>
+            SMTP 伺服器設定的頁面模型
+            </summary>
+        </member>
+        <member name="P:Competition.Program.PageModels.MailServer.ServerConfigurationPageModel.SmtpBootstraper">
+            <summary>
+            設定或取得 SMTP 伺服器啟動器
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Pages.ApiSite.Logging">
+            <summary>
+            Logging.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Pages.ApiSite.Logging.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Pages.ApiSite.SiteConfiguration">
+            <summary>
+            SiteConfiguration.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Pages.ApiSite.SiteConfiguration.IsFirstLoad">
+            <summary>
+            設定或取得是否第一次進入頁面
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Pages.ApiSite.SiteConfiguration.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Pages.MailServer.Inbox">
+            <summary>
+            Inbox.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Pages.MailServer.Inbox.IsFirstLoad">
+            <summary>
+            設定或取得是否第一次進入頁面
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Pages.MailServer.Inbox.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Pages.MailServer.Logging">
+            <summary>
+            Logging.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Pages.MailServer.Logging.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Pages.MailServer.ServerConfiguration">
+            <summary>
+            ServerConfiguration.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="P:Competition.Program.Pages.MailServer.ServerConfiguration.IsFirstLoad">
+            <summary>
+            設定或取得是否第一次進入頁面
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Pages.MailServer.ServerConfiguration.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Pages.MailServer.UC_Inbox">
+            <summary>
+            UC_Inbox.xaml 的互動邏輯
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Pages.MailServer.UC_Inbox.CreateMailTreeNodeModel(Aspose.Email.MailMessage)">
+            <summary>
+            將 <see cref="T:Aspose.Email.MailMessage"/> 轉換為 <see cref="T:Competition.Program.MailServer.Adapters.MailTreeNodeModel"/>
+            </summary>
+            <param name="mailMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Competition.Program.Pages.MailServer.UC_Inbox.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Competition.Program.Settings.SettintCollectionFactoryInternal">
+            <summary>
+            專案使用的設定檔工廠
+            </summary>
+        </member>
+        <member name="M:Competition.Program.Settings.SettintCollectionFactoryInternal.#ctor(Microsoft.Extensions.Caching.Memory.MemoryCache)">
+            <summary>
+            初始化設定檔工廠
+            </summary>
+            <param name="memoryCache"></param>
+        </member>
+        <member name="P:Competition.Program.Settings.SettintCollectionFactoryInternal.ApplicationSettingCollection">
+            <summary>
+            取得應用程式設定檔集合
+            </summary>
+        </member>
+    </members>
+</doc>
