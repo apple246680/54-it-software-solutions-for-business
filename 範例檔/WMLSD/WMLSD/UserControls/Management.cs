@@ -14,9 +14,8 @@ namespace WMLSD.UserControls
         public Management(bool canTr)
         {
             InitializeComponent();
-            var zonetime = Enumerable.Range(-12, 27).Select(i => new { Zone = $"{i:+00;-00;+00}:00", Value = i }).ToList();
-            TimeZoneComboBox.DataSource = zonetime;
-            TimeZoneComboBox2.DataSource = zonetime;
+            TimeZoneComboBox.DataSource = Enumerable.Range(-12, 27).Select(i => new { Zone = $"{i:+00;-00;+00}:00", Value = i }).ToList(); ;
+            TimeZoneComboBox2.DataSource = Enumerable.Range(-12, 27).Select(i => new { Zone = $"{i:+00;-00;+00}:00", Value = i }).ToList(); ;
             TimeZoneComboBox.SelectedIndex = 12;
             TimeZoneComboBox2.SelectedIndex = 12;
             if (canTr)
