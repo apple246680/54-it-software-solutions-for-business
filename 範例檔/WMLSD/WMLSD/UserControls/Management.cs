@@ -189,7 +189,7 @@ namespace WMLSD.UserControls
                         return 0;
                     }
                     var totalTicketCount = x.TicketWIthMuseums.Count(twm => twm.TicketID == ticket.ID);
-                    return (decimal)((aaprice-(aaprice*(decimal)0.03)) * (decimal)(ticketCountForThisMuseum / (decimal)totalTicketCount));
+                    return ((aaprice-(aaprice*(decimal)0.03)) * (decimal)(ticketCountForThisMuseum / (decimal)totalTicketCount));
 
                 }).Sum();
                 return new
