@@ -49,11 +49,11 @@ class MyTicket : Fragment() {
         binding=FragmentMyTicketBinding.inflate(layoutInflater)
         binding.TicketNumberTextView.text="TICKET-01-${Global.UserID}"
         CoroutineScope(Dispatchers.IO).launch {
-            val aa=Api.postAsync("http://10.0.2.2:5000/Image/GenerateQRCode",JSONObject().put("Text",binding.TicketNumberTextView.text.toString()).put("SizePixels",512).put("CorrectionLevel",3).toString())
+            val aa=Api.postAsync("http://itwebapi54.ddns.net:5000/api/Qrcode/GetQrcode",JSONObject().put("ticketMessage",binding.TicketNumberTextView.text.toString()).put("sizePixels",12).put("correctionLevel",3).toString())
             val bb=ByteArrayInputStream(aa).readBytes()
             withContext(Dispatchers.Main){
                 binding.QRCODEImageView.setImageBitmap(BitmapFactory.decodeByteArray(bb,0,bb.size))
-                object :CountDownTimer(60000,1000){
+                object:CountDownTimer(60000,1000){
                     override fun onFinish() {
                         binding.TimeTextView.text="請更新"
                     }
@@ -67,7 +67,7 @@ class MyTicket : Fragment() {
         binding.REFImageVIew.setOnClickListener{
             if (binding.TimeTextView.text=="請更新"){
                 CoroutineScope(Dispatchers.IO).launch {
-                    val aa=Api.postAsync("http://10.0.2.2:5000/Image/GenerateQRCode",JSONObject().put("Text",binding.TicketNumberTextView.text.toString()).put("SizePixels",512).put("CorrectionLevel",3).toString())
+                    val aa=Api.postAsync("http://itwebapi54.ddns.net:5000/api/Qrcode/GetQrcode",JSONObject().put("ticketMessage",binding.TicketNumberTextView.text.toString()).put("sizePixels",12).put("correctionLevel",3).toString())
                     val bb=ByteArrayInputStream(aa).readBytes()
                     withContext(Dispatchers.Main){
                         binding.QRCODEImageView.setImageBitmap(BitmapFactory.decodeByteArray(bb,0,bb.size))

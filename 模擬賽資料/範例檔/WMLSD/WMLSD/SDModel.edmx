@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WMLSDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="UpDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Museum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccountID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PayTime" Type="datetime" />
+          <Property Name="CreatedTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PassAge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AgeRange" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PassType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Time" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="PassTypeiD" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PassAgeID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketWIthMuseum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TicketID" Type="uniqueidentifier" />
+          <Property Name="MuseumID" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_Order_Account1">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_PassAge">
+          <End Role="PassAge" Type="Self.PassAge" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PassAge">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="PassAgeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_PassType">
+          <End Role="PassType" Type="Self.PassType" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PassType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="PassTypeiD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketWIthMuseum_Museum">
+          <End Role="Museum" Type="Self.Museum" Multiplicity="0..1" />
+          <End Role="TicketWIthMuseum" Type="Self.TicketWIthMuseum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Museum">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketWIthMuseum">
+              <PropertyRef Name="MuseumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketWIthMuseum_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketWIthMuseum" Type="Self.TicketWIthMuseum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketWIthMuseum">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WMLSDModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Museum" EntityType="Self.Museum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PassAge" EntityType="Self.PassAge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PassType" EntityType="Self.PassType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketWIthMuseum" EntityType="Self.TicketWIthMuseum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Order_Account1" Association="Self.FK_Order_Account1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Order" Association="Self.FK_Ticket_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_PassAge" Association="Self.FK_Ticket_PassAge">
+            <End Role="PassAge" EntitySet="PassAge" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_PassType" Association="Self.FK_Ticket_PassType">
+            <End Role="PassType" EntitySet="PassType" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketWIthMuseum_Museum" Association="Self.FK_TicketWIthMuseum_Museum">
+            <End Role="Museum" EntitySet="Museum" />
+            <End Role="TicketWIthMuseum" EntitySet="TicketWIthMuseum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketWIthMuseum_Ticket" Association="Self.FK_TicketWIthMuseum_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketWIthMuseum" EntitySet="TicketWIthMuseum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WMLSDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Account1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="UpDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Account1" FromRole="Account" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Museum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TicketWIthMuseums" Relationship="Self.FK_TicketWIthMuseum_Museum" FromRole="Museum" ToRole="TicketWIthMuseum" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="AccountID" Type="Guid" Nullable="false" />
+          <Property Name="PayTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Order_Account1" FromRole="Order" ToRole="Account" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_Order" FromRole="Order" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="PassAge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgeRange" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_PassAge" FromRole="PassAge" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="PassType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Ticket_PassType" FromRole="PassType" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="OrderID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="PassTypeiD" Type="Guid" Nullable="false" />
+          <Property Name="PassAgeID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Ticket_Order" FromRole="Ticket" ToRole="Order" />
+          <NavigationProperty Name="PassAge" Relationship="Self.FK_Ticket_PassAge" FromRole="Ticket" ToRole="PassAge" />
+          <NavigationProperty Name="PassType" Relationship="Self.FK_Ticket_PassType" FromRole="Ticket" ToRole="PassType" />
+          <NavigationProperty Name="TicketWIthMuseums" Relationship="Self.FK_TicketWIthMuseum_Ticket" FromRole="Ticket" ToRole="TicketWIthMuseum" />
+        </EntityType>
+        <EntityType Name="TicketWIthMuseum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="TicketID" Type="Guid" />
+          <Property Name="MuseumID" Type="Guid" />
+          <NavigationProperty Name="Museum" Relationship="Self.FK_TicketWIthMuseum_Museum" FromRole="TicketWIthMuseum" ToRole="Museum" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketWIthMuseum_Ticket" FromRole="TicketWIthMuseum" ToRole="Ticket" />
+        </EntityType>
+        <Association Name="FK_Order_Account1">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketWIthMuseum_Museum">
+          <End Role="Museum" Type="Self.Museum" Multiplicity="0..1" />
+          <End Role="TicketWIthMuseum" Type="Self.TicketWIthMuseum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Museum">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketWIthMuseum">
+              <PropertyRef Name="MuseumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_PassAge">
+          <End Role="PassAge" Type="Self.PassAge" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PassAge">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="PassAgeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_PassType">
+          <End Role="PassType" Type="Self.PassType" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PassType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="PassTypeiD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketWIthMuseum_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketWIthMuseum" Type="Self.TicketWIthMuseum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketWIthMuseum">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Museums" EntityType="Self.Museum" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="PassAges" EntityType="Self.PassAge" />
+          <EntitySet Name="PassTypes" EntityType="Self.PassType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <EntitySet Name="TicketWIthMuseums" EntityType="Self.TicketWIthMuseum" />
+          <AssociationSet Name="FK_Order_Account1" Association="Self.FK_Order_Account1">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketWIthMuseum_Museum" Association="Self.FK_TicketWIthMuseum_Museum">
+            <End Role="Museum" EntitySet="Museums" />
+            <End Role="TicketWIthMuseum" EntitySet="TicketWIthMuseums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Order" Association="Self.FK_Ticket_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_PassAge" Association="Self.FK_Ticket_PassAge">
+            <End Role="PassAge" EntitySet="PassAges" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_PassType" Association="Self.FK_Ticket_PassType">
+            <End Role="PassType" EntitySet="PassTypes" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketWIthMuseum_Ticket" Association="Self.FK_TicketWIthMuseum_Ticket">
+            <End Role="Ticket" EntitySet="Tickets" />
+            <End Role="TicketWIthMuseum" EntitySet="TicketWIthMuseums" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WMLSDModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="WMLSDModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Account1" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpDateTime" ColumnName="UpDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Museums">
+            <EntityTypeMapping TypeName="WMLSDModel.Museum">
+              <MappingFragment StoreEntitySet="Museum">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="WMLSDModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PassAges">
+            <EntityTypeMapping TypeName="WMLSDModel.PassAge">
+              <MappingFragment StoreEntitySet="PassAge">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AgeRange" ColumnName="AgeRange" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PassTypes">
+            <EntityTypeMapping TypeName="WMLSDModel.PassType">
+              <MappingFragment StoreEntitySet="PassType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WMLSDModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="WMLSDModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="PassTypeiD" ColumnName="PassTypeiD" />
+                <ScalarProperty Name="PassAgeID" ColumnName="PassAgeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketWIthMuseums">
+            <EntityTypeMapping TypeName="WMLSDModel.TicketWIthMuseum">
+              <MappingFragment StoreEntitySet="TicketWIthMuseum">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="MuseumID" ColumnName="MuseumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

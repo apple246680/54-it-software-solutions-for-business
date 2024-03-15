@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                Api.postAsync("http://10.0.2.2:5000/api/ConnectionMonitor/RetrieveSiteStatus",JSONObject().put("StationNumber",20).toString())
+                Api.postAsync("http://itwebapi54.ddns.net:5000/api/ConnectionMonitor/LoginStatus",JSONObject().put("stationNumber",20).toString())
                 withContext(Dispatchers.Main){
                     binding.apply {
                         StartButton.setBackgroundColor(Color.GREEN)

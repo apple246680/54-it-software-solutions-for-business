@@ -1,0 +1,5 @@
+﻿TicketAgeID,AgeType,AgeRange,Register,Discount
+1,兒童,6 歲以下,TRUE,5
+2,青少年,7 至 17 歲,TRUE,7
+3,成人,18 至 65 歲,FALSE,
+4,老人,66 歲以上,TRUE,6

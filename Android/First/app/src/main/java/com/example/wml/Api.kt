@@ -6,18 +6,14 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
 
-object Api {
-    fun connect(url:String,method:String):HttpURLConnection=(URL(url).openConnection() as HttpURLConnection).apply {
-        requestMethod=method
-        setRequestProperty("Content-Type","application/json")
-    }
+object Api{
     suspend fun postAsync(url: String, body: String): ByteArray = withContext(Dispatchers.IO) {
         val connection = URL(url).openConnection() as HttpURLConnection
 
         connection.run {
             requestMethod = "POST"
-            setRequestProperty("Content-Type", "application/json")
-            connectTimeout = 100
+            setRequestProperty("Content-Type", "application/json-patch+json")
+            connectTimeout = 10000
             doOutput = true
             outputStream.use { os ->
                 val inputBytes = body.toByteArray()
