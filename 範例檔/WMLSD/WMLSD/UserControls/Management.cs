@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Windows.Forms;
-using System.Text.Json;
 using System.Net.Http;
 using System.Text;
-using System.IO;
+using System.Text.Json;
+using System.Windows.Forms;
 namespace WMLSD.UserControls
 {
     public partial class Management : UserControl
     {
-        public Management(bool canTr)
+        public Management(bool canTr ,bool isVisitor)
         {
             InitializeComponent();
             TimeZoneComboBox.DataSource = Enumerable.Range(-12, 27).Select(i => new { Zone = $"{i:+00;-00;+00}:00", Value = i }).ToList(); ;
@@ -22,8 +22,8 @@ namespace WMLSD.UserControls
             {
                 tabControl1.SelectedIndex = Properties.Settings.Default.PageIndex;
             }
+            tabControl1.Visible = !isVisitor;
         }
-
         private void SearchButton_Click(object sender, EventArgs e)
         {
             OrderPanel.Visible = false;
@@ -75,12 +75,11 @@ namespace WMLSD.UserControls
                 OrderDataGridView.Rows.Clear();
                 data.ForEach(x =>
                 {
-                    OrderDataGridView.Rows.Add(x.OrderID, x.OrderPrice, x.Orderdel, x.OrderRealPrice, x.PayTime, x.CreatedTime, x.TicketCount);
+                    OrderDataGridView.Rows.Add(x.OrderID, x.OrderPrice.ToString("0.00"), x.Orderdel.ToString("0.00"), x.OrderRealPrice.ToString("0.00"), x.PayTime, x.CreatedTime, x.TicketCount);
                 });
                 OrderPanel.Visible = true;
             }
         }
-
         private void StopAccountLabel_Click(object sender, EventArgs e)
         {
             var entities = new Entities();
@@ -112,7 +111,6 @@ namespace WMLSD.UserControls
                 AccountDataGridView.Rows.Add(x.ID, x.FullName, x.Status, x.UpDate, x.CanOrder, x.canTotalTicket, x.canUseTicket, "查看");
             });
         }
-
         private void OrderDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
@@ -122,7 +120,7 @@ namespace WMLSD.UserControls
                 var Order = new Entities().Orders.Find(OrderID);
                 var data = Order.Tickets.OrderBy(x => x.OrderID).Select((x, y) => new
                 {
-                    ID = x.ID + $"-{(y + 1).ToString("000")}",
+                    ID = OrderID + $"-{(y + 1).ToString("000")}",
                     Name = string.IsNullOrWhiteSpace(x.Name) ? "不記名" : x.Name,
                     StartTime = x.StartTime.HasValue ? ((DateTimeOffset)(x.StartTime.Value.ToUniversalTime())).ToOffset(TimeSpan.FromHours((int)TimeZoneComboBox.SelectedValue)).ToString("yyyy-MM-dd HH:mm:ss") : "尚未啟用",
                     EndTime = x.EndTime.HasValue ? ((DateTimeOffset)(x.EndTime.Value.ToUniversalTime())).ToOffset(TimeSpan.FromHours((int)TimeZoneComboBox.SelectedValue)).ToString("yyyy-MM-dd HH:mm:ss") : "尚未啟用",
@@ -138,7 +136,6 @@ namespace WMLSD.UserControls
                 TicketPanel.Visible = true;
             }
         }
-
         private void TicketDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1 && e.ColumnIndex == 6)
@@ -160,7 +157,6 @@ namespace WMLSD.UserControls
                 }
             }
         }
-
         private void CalButton_Click(object sender, EventArgs e)
         {
             var entities = new Entities();
@@ -168,25 +164,25 @@ namespace WMLSD.UserControls
             var End = EndDateTimePicker.Value.Date;
             int timeZoneOffsetHours = (int)TimeZoneComboBox2.SelectedValue;
             var StartDate = new DateTimeOffset(Start.Year, Start.Month, Start.Day, 0, 0, 0, TimeSpan.FromHours(timeZoneOffsetHours));
-            var EndDate = new DateTimeOffset(End.Year, End.Month, End.Day, 0, 0, 0, TimeSpan.FromHours(timeZoneOffsetHours));
+            var EndDate = new DateTimeOffset(End.Year, End.Month, End.Day, 23, 59, 59, TimeSpan.FromHours(timeZoneOffsetHours));
             label9.Text = $"計算區間(起): {StartDate.ToString("yyyy/MM/dd HH:mm:ss zzz")}";
             label10.Text = $"計算區間(迄):{EndDate.ToString("yyyy/MM/dd HH:mm:ss zzz")}";
             var va = entities.TicketWIthMuseums.Where(x => x.Ticket.Order.PayTime >= StartDate && x.Ticket.Order.PayTime <= EndDate);
-            var totalPrice = va.Any() ? (decimal)va.Sum(x => (x.Ticket.PassAge.Discount * x.Ticket.PassType.Price)) : 0;
-            label8.Text = $"區間票面總額:{totalPrice}EUR";
+            var totalPrice = va.Any() ? (va.Sum(x => Math.Floor(x.Ticket.PassAge.Discount * x.Ticket.PassType.Price*100))/100) : 0;
+            label8.Text = $"區間票面總額:{totalPrice.ToString("0.00")}EUR";
             var GridData = entities.Museums.Where(x=>x.TicketWIthMuseums.Any(y=>y.Ticket.Order.PayTime>=StartDate&&y.Ticket.Order.PayTime<=EndDate)).ToList().Select(x =>
             {
                 var price = x.TicketWIthMuseums.GroupBy(twm => twm.Ticket).Select(g =>
                 {
                     var ticket = g.Key;
-                    var discount = ticket.PassAge.Discount;
-                    var basePrice = ticket.PassType.Price;
-                    var aaprice = basePrice * discount;
                     var ticketCountForThisMuseum = g.Count();
-                    if (ticketCountForThisMuseum==0)
+                    if (ticketCountForThisMuseum==0||!ticket.EndTime.HasValue||ticket.EndTime.Value< ((DateTimeOffset)(DateTime.Now.ToUniversalTime())).ToOffset(TimeSpan.FromHours((int)TimeZoneComboBox.SelectedValue)))
                     {
                         return 0;
                     }
+                    var discount = ticket.PassAge.Discount;
+                    var basePrice = ticket.PassType.Price;
+                    var aaprice = Math.Floor(basePrice * discount*100)/100;
                     var totalTicketCount = x.TicketWIthMuseums.Count(twm => twm.TicketID == ticket.ID);
                     return ((aaprice-(aaprice*(decimal)0.03)) * (decimal)(ticketCountForThisMuseum / (decimal)totalTicketCount));
 
@@ -203,10 +199,9 @@ namespace WMLSD.UserControls
             MuseumDataGridView.Rows.Clear();
             GridData.ForEach(x =>
             {
-                MuseumDataGridView.Rows.Add(x.OSMID,x.Name,x.Price);
+                MuseumDataGridView.Rows.Add(x.OSMID,x.Name,x.Price.ToString("0.00"));
             });
         }
-
         private void SaveButton_Click(object sender, EventArgs e)
         {
             var sfd = new SaveFileDialog();
@@ -240,7 +235,6 @@ namespace WMLSD.UserControls
                 }
             }
         }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.PageIndex=tabControl1.SelectedIndex;

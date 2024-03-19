@@ -26,6 +26,7 @@ namespace WMLSD
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<JobTitleData> JobTitleDatas { get; set; }
         public virtual DbSet<Museum> Museums { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<PassAge> PassAges { get; set; }

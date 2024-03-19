@@ -32,10 +32,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.AccountSearch = new System.Windows.Forms.TabPage();
             this.TicketPanel = new System.Windows.Forms.Panel();
             this.TicketDataGridView = new System.Windows.Forms.DataGridView();
+            this.TicketIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TicketNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TicketOpenTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TicketEndTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TicketTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TicketTypeColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QRColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -89,13 +100,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.StartDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.TicketIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TicketNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TicketOpenTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TicketEndTimeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TicketTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TicketTypeColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QRColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabControl1.SuspendLayout();
             this.AccountSearch.SuspendLayout();
             this.TicketPanel.SuspendLayout();
@@ -159,6 +163,7 @@
             // 
             this.TicketDataGridView.AllowUserToAddRows = false;
             this.TicketDataGridView.AllowUserToDeleteRows = false;
+            this.TicketDataGridView.AllowUserToResizeRows = false;
             this.TicketDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.TicketDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
             this.TicketDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -179,17 +184,79 @@
             this.TicketTypeColumn,
             this.TicketTypeColumn2,
             this.QRColumn});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.TicketDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.TicketDataGridView.EnableHeadersVisualStyles = false;
             this.TicketDataGridView.GridColor = System.Drawing.Color.Black;
             this.TicketDataGridView.Location = new System.Drawing.Point(3, 70);
+            this.TicketDataGridView.MultiSelect = false;
             this.TicketDataGridView.Name = "TicketDataGridView";
             this.TicketDataGridView.ReadOnly = true;
             this.TicketDataGridView.RowHeadersVisible = false;
             this.TicketDataGridView.RowHeadersWidth = 51;
             this.TicketDataGridView.RowTemplate.Height = 27;
+            this.TicketDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.TicketDataGridView.Size = new System.Drawing.Size(1134, 185);
             this.TicketDataGridView.TabIndex = 7;
             this.TicketDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TicketDataGridView_CellContentClick);
+            // 
+            // TicketIDColumn
+            // 
+            this.TicketIDColumn.HeaderText = "票號";
+            this.TicketIDColumn.MinimumWidth = 6;
+            this.TicketIDColumn.Name = "TicketIDColumn";
+            this.TicketIDColumn.ReadOnly = true;
+            // 
+            // TicketNameColumn
+            // 
+            this.TicketNameColumn.HeaderText = "記名";
+            this.TicketNameColumn.MinimumWidth = 6;
+            this.TicketNameColumn.Name = "TicketNameColumn";
+            this.TicketNameColumn.ReadOnly = true;
+            // 
+            // TicketOpenTimeColumn
+            // 
+            this.TicketOpenTimeColumn.HeaderText = "啟用時間";
+            this.TicketOpenTimeColumn.MinimumWidth = 6;
+            this.TicketOpenTimeColumn.Name = "TicketOpenTimeColumn";
+            this.TicketOpenTimeColumn.ReadOnly = true;
+            // 
+            // TicketEndTimeColumn
+            // 
+            this.TicketEndTimeColumn.HeaderText = "到期時間";
+            this.TicketEndTimeColumn.MinimumWidth = 6;
+            this.TicketEndTimeColumn.Name = "TicketEndTimeColumn";
+            this.TicketEndTimeColumn.ReadOnly = true;
+            // 
+            // TicketTypeColumn
+            // 
+            this.TicketTypeColumn.HeaderText = "票種";
+            this.TicketTypeColumn.MinimumWidth = 6;
+            this.TicketTypeColumn.Name = "TicketTypeColumn";
+            this.TicketTypeColumn.ReadOnly = true;
+            // 
+            // TicketTypeColumn2
+            // 
+            this.TicketTypeColumn2.HeaderText = "類型";
+            this.TicketTypeColumn2.MinimumWidth = 6;
+            this.TicketTypeColumn2.Name = "TicketTypeColumn2";
+            this.TicketTypeColumn2.ReadOnly = true;
+            // 
+            // QRColumn
+            // 
+            this.QRColumn.HeaderText = "票券QRCode";
+            this.QRColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.QRColumn.MinimumWidth = 6;
+            this.QRColumn.Name = "QRColumn";
+            this.QRColumn.ReadOnly = true;
+            this.QRColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.QRColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // label3
             // 
@@ -241,17 +308,18 @@
             // 
             this.OrderDataGridView.AllowUserToAddRows = false;
             this.OrderDataGridView.AllowUserToDeleteRows = false;
+            this.OrderDataGridView.AllowUserToResizeRows = false;
             this.OrderDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.OrderDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
             this.OrderDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.OrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderIDColumn,
@@ -261,14 +329,24 @@
             this.OrderPayTimeColumn,
             this.OrderCreatedTimeColumn,
             this.OrderTicketCountColumn});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.OrderDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.OrderDataGridView.EnableHeadersVisualStyles = false;
             this.OrderDataGridView.GridColor = System.Drawing.Color.Black;
             this.OrderDataGridView.Location = new System.Drawing.Point(3, 70);
+            this.OrderDataGridView.MultiSelect = false;
             this.OrderDataGridView.Name = "OrderDataGridView";
             this.OrderDataGridView.ReadOnly = true;
             this.OrderDataGridView.RowHeadersVisible = false;
             this.OrderDataGridView.RowHeadersWidth = 51;
             this.OrderDataGridView.RowTemplate.Height = 27;
+            this.OrderDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.OrderDataGridView.Size = new System.Drawing.Size(1134, 185);
             this.OrderDataGridView.TabIndex = 7;
             this.OrderDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrderDataGridView_CellContentClick);
@@ -373,17 +451,18 @@
             // 
             this.AccountDataGridView.AllowUserToAddRows = false;
             this.AccountDataGridView.AllowUserToDeleteRows = false;
+            this.AccountDataGridView.AllowUserToResizeRows = false;
             this.AccountDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.AccountDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
             this.AccountDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.AccountDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.AccountDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.AccountDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AccountDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AccountIDColumn,
@@ -394,14 +473,24 @@
             this.CanTicketCountColumn,
             this.NotExpiredTicketCountColumn,
             this.TColumn});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AccountDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.AccountDataGridView.EnableHeadersVisualStyles = false;
             this.AccountDataGridView.GridColor = System.Drawing.Color.Black;
             this.AccountDataGridView.Location = new System.Drawing.Point(7, 48);
+            this.AccountDataGridView.MultiSelect = false;
             this.AccountDataGridView.Name = "AccountDataGridView";
             this.AccountDataGridView.ReadOnly = true;
             this.AccountDataGridView.RowHeadersVisible = false;
             this.AccountDataGridView.RowHeadersWidth = 51;
             this.AccountDataGridView.RowTemplate.Height = 27;
+            this.AccountDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.AccountDataGridView.Size = new System.Drawing.Size(1137, 136);
             this.AccountDataGridView.TabIndex = 6;
             this.AccountDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AccountDataGridView_CellClick);
@@ -544,22 +633,31 @@
             // 
             this.MuseumDataGridView.AllowUserToAddRows = false;
             this.MuseumDataGridView.AllowUserToDeleteRows = false;
+            this.MuseumDataGridView.AllowUserToResizeRows = false;
             this.MuseumDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.MuseumDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
             this.MuseumDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.MuseumDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.MuseumDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.MuseumDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MuseumDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MuseumColumn,
             this.MuseumNameColumn,
             this.MuseumAmountColumn});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(161)))), ((int)(((byte)(79)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.MuseumDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
             this.MuseumDataGridView.EnableHeadersVisualStyles = false;
             this.MuseumDataGridView.GridColor = System.Drawing.Color.Black;
             this.MuseumDataGridView.Location = new System.Drawing.Point(25, 176);
@@ -742,58 +840,6 @@
             this.label4.Size = new System.Drawing.Size(108, 17);
             this.label4.TabIndex = 0;
             this.label4.Text = "篩選起始日期:";
-            // 
-            // TicketIDColumn
-            // 
-            this.TicketIDColumn.HeaderText = "票號";
-            this.TicketIDColumn.MinimumWidth = 6;
-            this.TicketIDColumn.Name = "TicketIDColumn";
-            this.TicketIDColumn.ReadOnly = true;
-            // 
-            // TicketNameColumn
-            // 
-            this.TicketNameColumn.HeaderText = "記名";
-            this.TicketNameColumn.MinimumWidth = 6;
-            this.TicketNameColumn.Name = "TicketNameColumn";
-            this.TicketNameColumn.ReadOnly = true;
-            // 
-            // TicketOpenTimeColumn
-            // 
-            this.TicketOpenTimeColumn.HeaderText = "啟用時間";
-            this.TicketOpenTimeColumn.MinimumWidth = 6;
-            this.TicketOpenTimeColumn.Name = "TicketOpenTimeColumn";
-            this.TicketOpenTimeColumn.ReadOnly = true;
-            // 
-            // TicketEndTimeColumn
-            // 
-            this.TicketEndTimeColumn.HeaderText = "到期時間";
-            this.TicketEndTimeColumn.MinimumWidth = 6;
-            this.TicketEndTimeColumn.Name = "TicketEndTimeColumn";
-            this.TicketEndTimeColumn.ReadOnly = true;
-            // 
-            // TicketTypeColumn
-            // 
-            this.TicketTypeColumn.HeaderText = "票種";
-            this.TicketTypeColumn.MinimumWidth = 6;
-            this.TicketTypeColumn.Name = "TicketTypeColumn";
-            this.TicketTypeColumn.ReadOnly = true;
-            // 
-            // TicketTypeColumn2
-            // 
-            this.TicketTypeColumn2.HeaderText = "類型";
-            this.TicketTypeColumn2.MinimumWidth = 6;
-            this.TicketTypeColumn2.Name = "TicketTypeColumn2";
-            this.TicketTypeColumn2.ReadOnly = true;
-            // 
-            // QRColumn
-            // 
-            this.QRColumn.HeaderText = "票券QRCode";
-            this.QRColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.QRColumn.MinimumWidth = 6;
-            this.QRColumn.Name = "QRColumn";
-            this.QRColumn.ReadOnly = true;
-            this.QRColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.QRColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Management
             // 

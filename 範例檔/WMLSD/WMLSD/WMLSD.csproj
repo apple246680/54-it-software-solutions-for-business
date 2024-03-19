@@ -61,6 +61,9 @@
       <DependentUpon>SDModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
+    <Compile Include="JobTitleData.cs">
+      <DependentUpon>SDModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,11 +89,6 @@
     </Compile>
     <Compile Include="QRCode.Designer.cs">
       <DependentUpon>QRCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Resource1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
     <Compile Include="SDModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -143,10 +141,6 @@
     </Compile>
     <EmbeddedResource Include="QRCode.resx">
       <DependentUpon>QRCode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resource1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

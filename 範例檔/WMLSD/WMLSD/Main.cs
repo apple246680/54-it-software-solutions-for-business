@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Forms;
-using WMLSD.UserControls;
 namespace WMLSD
 {
     public partial class Main : Form

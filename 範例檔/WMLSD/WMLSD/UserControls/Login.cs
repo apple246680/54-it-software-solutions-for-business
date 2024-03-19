@@ -37,10 +37,9 @@ namespace WMLSD.UserControls
             var bools = Properties.Settings.Default.AccountID == account.ID;
             Properties.Settings.Default.AccountID = account.ID;
             Properties.Settings.Default.Save();
-            Global.ShowUserControl(new Management(bools) { Dock = DockStyle.Fill });
+            Global.ShowUserControl(new Management(bools,account.JobTitleData.JobTitle == "Visitor") { Dock = DockStyle.Fill });
             Global.LoginButton.Text = "登出";
-            MessageBox.Show("登入成功");
-
+            MessageBox.Show(account.JobTitleData.JobTitle == "Visitor"?"你是遊客":"恭喜登入成功管理員");
         }
         private string Sha256Hash(string rawData)
         {
